@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body id="body">
+    <input type="text" id="input">
+    <button id="button" onclick="add_src()"></button>
+    <button id="button_2" onclick="erase_src()"></button>
+    <style>
+        #input{
+            position: fixed;
+        }
+        #button{
+            position:fixed;
+            left: 200px;
+            height: 20px;
+        }
+        #button_2{
+            background-color: red;
+            position:fixed;
+            left: 220px;
+            height: 20px;
+        }
+    </style>
+    <script>
+        function create_element(type='canvas',id='canvas',src){
+        //text
+        var ele = document.createElement(type);
+        ele.id = id
+        ele.src = src
+        console.log(ele)
+        document.getElementById('body').appendChild(ele);}
+        
+        
+        let index = 0
+        let index_no_loop = 0
+        let list_obj = []
+        let list_ft_src = ['https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/f6404c03-17ad-466e-8a0b-adda8cf2ad43/didndvz-c5ab4fd5-87fd-4e20-8e43-9a0b16758f50.png/v1/fill/w_1280,h_1280/sheikah_symbol_2k_by_matzero78_didndvz-fullview.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7ImhlaWdodCI6Ijw9MTI4MCIsInBhdGgiOiJcL2ZcL2Y2NDA0YzAzLTE3YWQtNDY2ZS04YTBiLWFkZGE4Y2YyYWQ0M1wvZGlkbmR2ei1jNWFiNGZkNS04N2ZkLTRlMjAtOGU0My05YTBiMTY3NThmNTAucG5nIiwid2lkdGgiOiI8PTEyODAifV1dLCJhdWQiOlsidXJuOnNlcnZpY2U6aW1hZ2Uub3BlcmF0aW9ucyJdfQ.X7odMeJaxKyljEn9rtr9cmtxPEVs_VruXW0zgO9b6Nc',
+        'https://deltiasgaming.com/wp-content/uploads/2024/10/goku-black.jpg',
+        'https://deltiasgaming.com/wp-content/uploads/2024/10/goku-black-2.jpg'
+        ]
+
+
+        function create_img() {
+            if (index_no_loop < list_ft_src.length){
+            
+            create_element('img',index_no_loop,list_ft_src[index_no_loop]);
+            var elem = document.getElementById(index_no_loop)
+            list_obj.push(elem);
+            index_no_loop += 1
+        }
+        }
+        function reajust(){
+            if (index < list_ft_src.length){index+=1}
+            if (index === list_ft_src.length){index=0}
+            list_obj[index].width = window.innerWidth
+            list_obj[index].height = window.innerHeight
+        }
+        function add_src(){
+            const input = document.getElementById("input");
+            const inputValue = input.value;
+            list_ft_src.push(inputValue)
+        }
+
+        function erase_src(){
+            const input = document.getElementById("input");
+            input.value = ''
+            
+        }
+        //bucle
+        var intervalId; 
+
+        function iniciarBucle(funct,fps) {
+            var contador = 0; 
+
+            
+            intervalId = setInterval(function() {
+                funct();
+                contador++;
+                
+            }, fps); 
+        }
+        iniciarBucle(create_img,50)
+        iniciarBucle(reajust,50)
+    </script>
+</body>
+</html>
